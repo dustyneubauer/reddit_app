@@ -1,29 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    articles: [],
-    isLoading: false,
-    hasError: false,
-}
 
 export const loadAllArticles = createAsyncThunk(
     'articles/loadAllArticles',
     async () => {
-    const redditData = await fetch('https://www.reddit.com/r/sports.json');
+    const redditData = await fetch('https://www.reddit.com/r/popular.json');
     const json = await redditData.json();
-    console.log(json);
     return json;
     }
 )
 
-const options = {
+export const articlesSlice = createSlice({
     name: 'articles',
-    initialState,
+    initialState:{
+        articles: [],
+        isLoading: false,
+        hasError: false,
+    },
     extraReducers: (builder) => {
         builder
         .addCase(loadAllArticles.fulfilled, (state,action) => {
             state.articles= action.payload;
             state.isLoading = false;
+            console.log(action.payload);
         })
         .addCase(loadAllArticles.pending, (state,action)=>{
             state.isLoading= true;
@@ -34,10 +33,8 @@ const options = {
             state.hasError= true;
         })
     }
-}
+})
 
-export const articlesSlice = createSlice(options);
-export const selectAllArticles = (state) => state.articles.artciles;
+export const selectAllArticles = (state) => state.articles.articles;
 export const isLoading = (state) => state.articles.isLoading;
 export default articlesSlice.reducer;
-
