@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
-import { store } from "../../store";
 // import articlesList from "./articlesList";
 
 
@@ -11,9 +10,11 @@ export const Articles = () => {
     const viewArticles = useSelector(selectAllArticles);
     const isLoadingArticles = useSelector(isLoading);
 
+    console.log(viewArticles);
 
-const allArticles = viewArticles.data.children.map(article => {
+const allArticles = viewArticles.map(article => {
     const container = {};
+    container.id =article.id;
     container.author = article.author;
     container.title = article.title;
     container.image = article.thumbnail;
