@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
-import articlesList from "./articlesList";
+// import articlesList from "./articlesList";
 
 
 
@@ -9,6 +9,16 @@ export const Articles = () => {
     const dispatch = useDispatch();
     const viewArticles = useSelector(selectAllArticles);
     const isLoadingArticles = useSelector(isLoading);
+
+const allArticles = viewArticles.map(article => {
+    const container = {};
+    container.author = article.data.author;
+    container.title = article.data.title;
+    container.image = article.data.thumbnail;
+    container.reroute = article.data.url;
+
+    return container;
+})
 
     useEffect(() => {
         dispatch(loadAllArticles());
@@ -21,8 +31,12 @@ export const Articles = () => {
     return (
         <>
         <h2>All Articles</h2>
-        {articlesList.map((thing)=> {
-            <articlesList thing={thing} />
+        {allArticles.forEach(element => {
+        <button>
+            <h3>{allArticles.title}</h3>;
+            <h4>{allArticles.author}</h4>;
+            <img src='{article.url}'/>;
+        </button>
         })}
         </>
        );

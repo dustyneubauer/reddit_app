@@ -1,6 +1,6 @@
 import React from "react";
 
-export default articlesList = ({thing}) => {
+const articlesList = ({thing}) => {
     return (
         <button key={thing.id}>
             <h3>{thing.name}</h3>
@@ -8,3 +8,5 @@ export default articlesList = ({thing}) => {
         </button>
     );
 };
+
+export default articlesList;

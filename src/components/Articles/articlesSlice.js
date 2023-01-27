@@ -10,7 +10,8 @@ export const loadAllArticles = createAsyncThunk(
     'articles/loadAllArticles',
     async () => {
     const redditData = await fetch('https://www.reddit.com/r/sports.json');
-    const json = await redditData.json;
+    const json = await redditData.json();
+    console.log(json);
     return json;
     }
 )
@@ -20,15 +21,15 @@ const options = {
     initialState,
     extraReducers: (builder) => {
         builder
-        .addcase(loadAllArticles.fulfilled, (state,action) => {
+        .addCase(loadAllArticles.fulfilled, (state,action) => {
             state.articles= action.payload;
             state.isLoading = false;
         })
-        .addcase(loadAllArticles.pending, (state,action)=>{
+        .addCase(loadAllArticles.pending, (state,action)=>{
             state.isLoading= true;
             state.hasError= false;
         })
-        .addcase(loadAllArticles.rejected, (state,action) =>{
+        .addCase(loadAllArticles.rejected, (state,action) =>{
             state.articles= [];
             state.hasError= true;
         })
