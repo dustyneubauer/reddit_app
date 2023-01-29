@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const loadAllArticles = createAsyncThunk(
     'articles/loadAllArticles',
     async () => {
-    const redditData = await fetch('https://www.reddit.com/r/popular.json');
+    const redditData = await fetch('https://www.reddit.com/r/sports.json');
     const json = await redditData.json();
     return json.data.children.map(article => article.data);
     }
@@ -17,16 +17,17 @@ export const articlesSlice = createSlice({
         isLoading: false,
         hasError: false,
     },
-    reducers: {
-        filterArticles: (state, action) => {
-            state[id] = action.payload.filter(id => action.payload !== id);
-        },
-    },
+    // reducers: {
+    //     filterArticles: (state, action) => {
+    //         state.articles[id] = action.payload.filter(id => action.payload !== id);
+    //     },
+    // },
     extraReducers: (builder) => {
         builder
         .addCase(loadAllArticles.fulfilled, (state,action) => {
             state.articles = action.payload;
             state.isLoading = false;
+            console.log(action.payload);
         })
         .addCase(loadAllArticles.pending, (state,action)=>{
             state.isLoading= true;

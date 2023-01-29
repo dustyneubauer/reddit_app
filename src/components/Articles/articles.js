@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
 // import articlesList from "./articlesList";
 
@@ -10,7 +10,6 @@ export const Articles = () => {
     const viewArticles = useSelector(selectAllArticles);
     const isLoadingArticles = useSelector(isLoading);
 
-    console.log(viewArticles);
 
 const allArticles = viewArticles.map(article => {
     const container = {};
@@ -23,6 +22,7 @@ const allArticles = viewArticles.map(article => {
     return container;
 })
 
+console.log(allArticles);
 
     useEffect(() => {
         dispatch(loadAllArticles());
@@ -33,14 +33,19 @@ const allArticles = viewArticles.map(article => {
       }
 
     return (
-        <>
+        <>    
         <h2>All Articles</h2>
-        {allArticles.forEach(element => {
-        <button>
-            <h3>{element.title}</h3>;
-            <h4>{element.author}</h4>;
-            <img src='{element.url}'/>;
-        </button>
+        {allArticles.map((element) => { 
+            return (
+            <div key={element.id}>
+                <button onClick= {event=> window.location.href=element.reroute} target="_blank">    
+                    <h3>{element.title}</h3>
+                    <img src={element.image}/>
+                    <h4> {element.author}</h4>
+                    Click to view on Reddit
+                </button>
+            </div>
+            );
         })}
         </>
        );
