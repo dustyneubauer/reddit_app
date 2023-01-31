@@ -1,12 +1,19 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadAllArticles, isLoading } from "./articlesSlice";
 
-const articlesList = ({thing}) => {
+export const SearchBar = () => {
+    const dispatch = useDispatch();
+    const isLoadingArticles = useSelector(isLoading);
+
+    // const onSubmit = useEffect(() =>{
+    //     dispatch(loadAllArticles(e => e.target.value.toLowerCase()));
+    // }, [useDispatch]); 
+
     return (
-        <button key={thing.id}>
-            <h3>{thing.name}</h3>
-            <p>{thing.data}</p>
-        </button>
-    );
-};
-
-export default articlesList;
+        <form>
+            <input type="text"/>
+            <input type ="submit" value="search"/>
+        </form>
+    )
+}

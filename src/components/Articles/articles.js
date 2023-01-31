@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { Component, useEffect } from "react";
 import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
 // import articlesList from "./articlesList";
+import {loadCurrentArticle} from "./currentArticleSlice";
 
 
 
@@ -22,8 +23,6 @@ const allArticles = viewArticles.map(article => {
     return container;
 })
 
-console.log(allArticles);
-
     useEffect(() => {
         dispatch(loadAllArticles());
     }, [dispatch]);
@@ -38,11 +37,11 @@ console.log(allArticles);
         {allArticles.map((element) => { 
             return (
             <div key={element.id}>
-                <button onClick= {event=> window.location.href=element.reroute} target="_blank">    
+                <button onClick={(e) => dispatch(loadCurrentArticle(element.id, element.title))}>    
                     <h3>{element.title}</h3>
                     <img src={element.image}/>
-                    <h4> {element.author}</h4>
-                    Click to view on Reddit
+                    <h4>Posted By: {element.author}</h4>
+                    Click to view comments
                 </button>
             </div>
             );

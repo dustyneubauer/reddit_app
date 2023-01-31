@@ -3,9 +3,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loadAllArticles = createAsyncThunk(
     'articles/loadAllArticles',
-    async () => {
-    const redditData = await fetch('https://www.reddit.com/r/sports.json');
+    async (searchTerm) => {
+        if (searchTerm){
+            const escapedSearchTerm = encodeURI(searchTerm);
+            const redditData = await fetch(`https://www.reddit.com/r/sports/${escapedSearchTerm}`);
+            const json = await redditData.json();
+            return json.data.children.map(article => article.data);
+        }
+    const redditData = await fetch('https://www.reddit.com/r/sports/.json');
     const json = await redditData.json();
+    console.log(json);
     return json.data.children.map(article => article.data);
     }
 )
@@ -27,7 +34,6 @@ export const articlesSlice = createSlice({
         .addCase(loadAllArticles.fulfilled, (state,action) => {
             state.articles = action.payload;
             state.isLoading = false;
-            console.log(action.payload);
         })
         .addCase(loadAllArticles.pending, (state,action)=>{
             state.isLoading= true;
