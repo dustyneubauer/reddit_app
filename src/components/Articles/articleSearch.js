@@ -6,14 +6,14 @@ export const SearchBar = () => {
     const dispatch = useDispatch();
     const isLoadingArticles = useSelector(isLoading);
 
-    // const onSubmit = useEffect(() =>{
-    //     dispatch(loadAllArticles(e => e.target.value.toLowerCase()));
-    // }, [useDispatch]); 
+    const handleSubmit = useEffect(() =>{
+        dispatch(loadAllArticles((e) => e.target.value.toLowerCase()));
+    }, [useDispatch]); 
 
     return (
-        <form>
-            <input type="text"/>
-            <input type ="submit" value="search"/>
+        <form action={handleSubmit}>
+            <input type='search'></input>
+            <input type='submit' value='search'></input>
         </form>
     )
 }

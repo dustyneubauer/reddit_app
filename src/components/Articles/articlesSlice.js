@@ -6,7 +6,7 @@ export const loadAllArticles = createAsyncThunk(
     async (searchTerm) => {
         if (searchTerm){
             const escapedSearchTerm = encodeURI(searchTerm);
-            const redditData = await fetch(`https://www.reddit.com/r/sports/${escapedSearchTerm}`);
+            const redditData = await fetch(`https://www.reddit.com/r/sports/${escapedSearchTerm}.json`);
             const json = await redditData.json();
             return json.data.children.map(article => article.data);
         }
