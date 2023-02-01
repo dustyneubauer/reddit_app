@@ -24,11 +24,6 @@ export const articlesSlice = createSlice({
         isLoading: false,
         hasError: false,
     },
-    // reducers: {
-    //     filterArticles: (state, action) => {
-    //         state.articles[id] = action.payload.filter(id => action.payload !== id);
-    //     },
-    // },
     extraReducers: (builder) => {
         builder
         .addCase(loadAllArticles.fulfilled, (state,action) => {

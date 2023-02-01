@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './error-page';
 import { ClickedArticle } from './components/Articles/currentArticle';
-import { loadCurrentArticle as currentArticleLoader} from './components/Articles/currentArticleSlice';
 
 const router = createBrowserRouter([
   {
