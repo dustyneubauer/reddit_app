@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
 // import articlesList from "./articlesList";
 import {loadCurrentArticle} from "./currentArticleSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -37,11 +38,11 @@ const allArticles = viewArticles.map(article => {
         {allArticles.map((element) => { 
             return (
             <div key={element.id}>
-                <button onClick={(e) => dispatch(loadCurrentArticle(element.id, element.title))}>    
+                <button onClick={()=> dispatch(loadCurrentArticle(element.id, element.title))}>    
                     <h3>{element.title}</h3>
                     <img src={element.image}/>
                     <h4>Posted By: {element.author}</h4>
-                    Click to view comments
+                    <p>Click to view comments</p>
                 </button>
             </div>
             );

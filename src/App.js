@@ -10,6 +10,9 @@ function App() {
       <header>
         <SearchBar />
       </header>
+      {/* <div>
+        <ClickedArticle />
+      </div> */}
       <Articles />
     </div>
   );

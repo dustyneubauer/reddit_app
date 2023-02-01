@@ -10,7 +10,7 @@ export const loadAllArticles = createAsyncThunk(
             const json = await redditData.json();
             return json.data.children.map(article => article.data);
         }
-    const redditData = await fetch('https://www.reddit.com/r/sports/.json');
+    const redditData = await fetch('https://www.reddit.com/r/sports.json');
     const json = await redditData.json();
     console.log(json);
     return json.data.children.map(article => article.data);

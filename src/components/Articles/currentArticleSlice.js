@@ -3,8 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const loadCurrentArticle = createAsyncThunk(
     'currentArticle/loadCurrentArticle',
     async (articleId, articleTitle) => {
-        const data = await fetch(`https://www.reddit.com/r/sports/comments/${articleId}/${articleTitle}`)
+        const data = await fetch(`https://www.reddit.com/r/sports/comments/${articleId}/${articleTitle}.json`)
         const json = await data.json();
+        console.log(json);
         return json;
     }
 );
@@ -26,7 +27,6 @@ export const currentArticleSlice= createSlice({
                 state.isLoadingArticle= false;
                 state.article = action.payload;
                 state.hasError = false;
-                console.log(action.payload);
             })
             .addCase(loadCurrentArticle.rejected, (state)=> {
                 state.hasError= true;

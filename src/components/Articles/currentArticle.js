@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { selectArticle, isLoadingArticle, } from "./currentArticleSlice";
-import Markdown from 'markdown-to-jsx';
 
 export const ClickedArticle = () => {
     const dispatch=useDispatch();
