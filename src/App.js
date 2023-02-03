@@ -8,7 +8,10 @@ function App() {
   return (
     <div className="App">
       <header>
+        <img src="./images/reddit.png" alt="logo"/>
+        <div className="container">
         <SearchBar />
+        </div>
       </header>
       {/* <div>
         <ClickedArticle />

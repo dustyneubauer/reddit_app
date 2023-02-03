@@ -4,7 +4,7 @@ import { loadCurrentArticle, selectArticle, isLoadingArticle, } from "./currentA
 import { useParams } from "react-router-dom";
 import Markdown from "markdown-to-jsx";
 
-export const ClickedArticle = () => {
+export const ClickedArticle = (props) => {
     const dispatch=useDispatch();
     const article = useSelector(selectArticle);
     const clickedArticleIsLoading = useSelector(isLoadingArticle);  
