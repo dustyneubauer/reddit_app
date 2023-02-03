@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllArticles, isLoading } from "./articlesSlice";
 
@@ -6,14 +6,16 @@ export const SearchBar = () => {
     const dispatch = useDispatch();
     const isLoadingArticles = useSelector(isLoading);
 
-    const handleSubmit = useEffect(() =>{
-        dispatch(loadAllArticles((e) => e.target.value.toLowerCase()));
-    }, [useDispatch]); 
+const [searchInput, setSearchInput] = useState('');
+
+const searchItems = (searchValue) =>{
+    setSearchInput(searchValue);
+    dispatch(loadAllArticles(searchInput));
+} 
+
+console.log(searchInput);
 
     return (
-        <form action={handleSubmit}>
-            <input type='search'></input>
-            <input type='submit' value='search'></input>
-        </form>
+        <input placeholder="Search..." onChange={(e)=> searchItems(e.target.value)}/>
     )
 }

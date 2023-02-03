@@ -16,9 +16,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "currentArticle",
+    path: "/article/:articleId/:articleTitle",
     element: <ClickedArticle />,
-    errorElement: <ErrorPage />,
   }
 ]);
 

@@ -5,14 +5,14 @@ export const loadAllArticles = createAsyncThunk(
     'articles/loadAllArticles',
     async (searchTerm) => {
         if (searchTerm){
-            const escapedSearchTerm = encodeURI(searchTerm);
-            const redditData = await fetch(`https://www.reddit.com/r/sports/${escapedSearchTerm}.json`);
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            const escapedSearchTerm = encodeURI(lowerCaseSearchTerm);
+            const redditData = await fetch(`https://www.reddit.com/r/sports/search.json?q=${escapedSearchTerm}.json`);
             const json = await redditData.json();
             return json.data.children.map(article => article.data);
         }
     const redditData = await fetch('https://www.reddit.com/r/sports.json');
     const json = await redditData.json();
-    console.log(json);
     return json.data.children.map(article => article.data);
     }
 )

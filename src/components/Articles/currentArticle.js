@@ -1,29 +1,20 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { selectArticle, isLoadingArticle, } from "./currentArticleSlice";
+import { loadCurrentArticle, selectArticle, isLoadingArticle, } from "./currentArticleSlice";
+import { useParams } from "react-router-dom";
+import Markdown from "markdown-to-jsx";
 
 export const ClickedArticle = () => {
     const dispatch=useDispatch();
     const article = useSelector(selectArticle);
     const clickedArticleIsLoading = useSelector(isLoadingArticle);  
 
-console.log(article);
+    const {articleId, articleTitle} = useParams();
 
-const currentArticle = article[0].data.children.map(element => {
-    const articleContainer= {};
-    articleContainer.id = element.data.id;
-    articleContainer.title = element.data.title;
-    articleContainer.author = element.data.author;
-    articleContainer.image = element.data.thumbnail;
-})
-
-const currentArticleComments = article[1].data.children.map(element => {
-    const commentsContainer = {};
-    commentsContainer.id = element.data.id;
-    commentsContainer.author = element.data.id;
-    commentsContainer.content = element.data.body;
-})
-
+    useEffect(()=>{
+        dispatch(loadCurrentArticle(articleId, articleTitle))
+    },[articleId, articleTitle])
+    
 
     if (clickedArticleIsLoading) {
         return <div>Loading Article</div>
@@ -31,14 +22,26 @@ const currentArticleComments = article[1].data.children.map(element => {
         return null;
     }
 
+const currentArticle = article[0].data.children[0].data
+
+const currentArticleComments = article[1].data.children.map(element => {
+    const commentsContainer = {};
+    commentsContainer.id = element.data.id;
+    commentsContainer.author = element.data.author;
+    commentsContainer.body = element.data.body;
+    return commentsContainer;
+})
+
+
     return (
         <>
             <h1>{currentArticle.title}</h1>
+            <img src={currentArticle.thumbnail}/>
             <h4>Posted by: {currentArticle.author}</h4>
         {currentArticleComments.map(element=>{
             return (
                 <div key={element.id}>
-                    <h3>{element.content}</h3>
+                    <h3><Markdown>{element.body}</Markdown></h3>
                     <h4>Comment by: {element.author}</h4>
                 </div>
             )
