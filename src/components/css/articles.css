@@ -17,11 +17,32 @@ h2 {
     margin: 40px 0 0 0;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 0  auto;
+    margin-top: 40px;
 }
 
 .all-articles-container {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+h4 {
+    color: black;
+    background-color: red;
+    border-radius: 10px;
+    padding: 5px;
+    width: max-content;
+}
+
+a:link {
+    color: black;
+}
+a:visited {
+    color: grey;
+}
+
+.author-container {
+    text-align: center;
+    justify-content: center;
 }

@@ -4,6 +4,7 @@ import { loadAllArticles, selectAllArticles, isLoading } from "./articlesSlice";
 // import articlesList from "./articlesList";
 import { Link } from "react-router-dom";
 import '../css/articles.css';
+import { renderIntoDocument } from "react-dom/test-utils";
 
 
 
@@ -22,7 +23,7 @@ const allArticles = viewArticles.map(article => {
     if (image){
     container.image = image;
     } else if(image === null) {
-        container.image= '../images/reddit.png'
+        container.image= '../images/reddit.png';
     }
     container.reroute = article.url;
 
@@ -39,7 +40,7 @@ const allArticles = viewArticles.map(article => {
 
     return (
        <> 
-        <h2>All Articles</h2>
+        <h2>Reddit Sports</h2>
         <div class="all-articles-container">
         {allArticles.map((element) => { 
             return (
@@ -47,8 +48,9 @@ const allArticles = viewArticles.map(article => {
                 <Link to={`/article/${element.id}/${element.title}`}>    
                     <h3 class="title">{element.title}</h3>
                     <img src={element.image}/>
+                    <div class="author-container">
                     <h4>Posted By: {element.author}</h4>
-                    <p>Click to view comments</p>
+                    </div>
                 </Link>
             </div>
             );
