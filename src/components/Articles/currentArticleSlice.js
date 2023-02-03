@@ -5,7 +5,6 @@ export const loadCurrentArticle = createAsyncThunk(
     async (articleId, articleTitle) => {
         const data = await fetch(`https://www.reddit.com/r/sports/comments/${articleId}/${articleTitle}.json`)
         const json = await data.json();
-        console.log(json);
         return json;
     }
 );

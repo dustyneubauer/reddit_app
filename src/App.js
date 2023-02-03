@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {Articles} from "./components/Articles/articles";
 import { SearchBar} from "./components/Articles/articleSearch";
@@ -8,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img src="./images/reddit.png" alt="logo"/>
+        <img src={require("./images/reddit.png")} alt="logo"/>
         <div className="container">
         <SearchBar />
         </div>
